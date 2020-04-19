@@ -5,7 +5,7 @@
 echo "project_name="$project_name
 source $project_name/bin/activate
 
-sudo apt install zip python3-pip
+sudo apt-get install -y zip python3-pip
 pip3 install awscli
 
 echo "Compressing bin"
