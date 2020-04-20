@@ -5,6 +5,7 @@
 echo "project_name="$project_name
 source $project_name/bin/activate
 
+sudo apt-get update -y
 sudo apt-get install -y zip python3-pip
 pip3 install awscli
 
