@@ -14,7 +14,13 @@ lambdaLayers = {}
 resourceZipDirectories = {}
 
 #Create a lambda layer for web scraping
-lambdaLayers['scraping'] = ["bs4", "selenium"]
+lambdaLayers['scraping'] = [
+    resourceOriginalDirectory1+"bs4", 
+    resourceOriginalDirectory1+"selenium", 
+    resourceOriginalDirectory2+"bs4",
+    resourceOriginalDirectory2+"selenium",
+    "bin/webclaw.py"
+]
 resourceZipDirectories['scraping'] = "python/"
 
 #Create a place to put the resources while zipping them.
@@ -26,9 +32,9 @@ for name, sources in lambdaLayers.items():
     mkdir("-p", resourceZipDirectory)
     for source in sources:
         try:
-            cp("-rf", resourceOriginalDirectory1+source, resourceZipDirectory)
+            cp("-rf", source, resourceZipDirectory)
         except:
-            cp("-rf", resourceOriginalDirectory2+source, resourceZipDirectory)
+            print("No source found at",source)
     with ZipFile(name+".zip", 'w') as ziph:
         for root, dirs, files in os.walk(resourceZipDirectory):
             for file in files:
