@@ -6,6 +6,12 @@ echo "project_name="$project_name
 source $project_name/bin/activate
 
 echo " ---------------------- "
+ls -al
+echo " ---------------------- "
+pwd
+echo " ---------------------- "
+s
+echo " ---------------------- "
 echo "python3 build-scraper.py"
 python3 build-scraper.py
 echo " ---------------------- "
