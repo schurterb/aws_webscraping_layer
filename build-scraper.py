@@ -7,13 +7,14 @@ from sh import mkdir, cp, rm
 
 from buildtools import createOrUpdateLambdaLayer
 
-resourceOriginalDirectory = "aws_webscraping_layer/lib/python3.6/site-packages/"
+resourceOriginalDirectory1 = "aws_webscraping_layer/lib/python3.6/site-packages/"
+resourceOriginalDirectory2 = "aws_webscraping_layer/lib/python3.7/site-packages/"
 
 lambdaLayers = {}
 resourceZipDirectories = {}
 
 #Create a lambda layer for web scraping
-lambdaLayers['scraping'] = [resourceOriginalDirectory+"bs4", resourceOriginalDirectory+"selenium"]
+lambdaLayers['scraping'] = ["bs4", "selenium"]
 resourceZipDirectories['scraping'] = "python/"
 
 #Create a place to put the resources while zipping them.
@@ -24,7 +25,10 @@ for name, sources in lambdaLayers.items():
     resourceZipDirectory = resourceZipDirectories[name]
     mkdir("-p", resourceZipDirectory)
     for source in sources:
-        cp("-rf", source, resourceZipDirectory)
+        try:
+            cp("-rf", resourceOriginalDirectory1+source, resourceZipDirectory)
+        except:
+            cp("-rf", resourceOriginalDirectory2+source, resourceZipDirectory)
     with ZipFile(name+".zip", 'w') as ziph:
         for root, dirs, files in os.walk(resourceZipDirectory):
             for file in files:

@@ -10,7 +10,7 @@ ls -al
 echo " ---------------------- "
 pwd
 echo " ---------------------- "
-s
+
 echo " ---------------------- "
 echo "python3 build-scraper.py"
 python3 build-scraper.py
