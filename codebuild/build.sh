@@ -5,15 +5,9 @@
 echo "project_name="$project_name
 source $project_name/bin/activate
 
-sudo apt-get update -y
-sudo apt-get install -y zip python3-pip
-pip3 install awscli
-
-echo "Compressing bin"
-zip -r bin/* layer.zip
-
-echo "Publish lambda layer"
-aws lambda publish-layer-version --layer-name "scraping" --compatible-runtimes "python3.6" "python3.7" --zip-file fileb://layer.zip
-
+echo " ---------------------- "
+echo "python3 build-scraper.py"
+python3 build-scraper.py
+echo " ---------------------- "
 
 deactivate
